@@ -1,26 +1,78 @@
 <?php
 require_once __DIR__ . '/../models/Movie.php';
 
-$movie1 = new Movie('Il Labirinto del Fauno', 'Guillermo del Toro');
-$movie1->releaseYear = 2006;
-$movie1->genre = 'Drammatico';
-$movie1->duration = 118;
-$movie1->img = 'https://pad.mymovies.it/filmclub/2006/05/316/locandina.jpg';
-
-// Verifico se il film1 ha un'immagine di copertina
-if ($movie1->img === null) {
-    $movie1->img = $movie1->defaultImg($movie1->img);
-}
-
-$movie2 = new Movie('Il Caso di Thomas Crawford', 'Gregory Hoblit');
-$movie2->releaseYear = 2007;
-$movie2->genre = 'Thriller';
-$movie2->duration = 113;
-
-// Verifico se il film2 ha un'immagine di copertina
-if ($movie2->img === null) {
-    $movie2->img = $movie2->defaultImg($movie2->img);
-}
-
-
-?>
+// Creo un array con la lista dei film
+$rawMoviesList = [
+    [
+        'title' => 'Il Labirinto del Fauno',
+        'director' => 'Guillermo del Toro',
+        'releaseYear' => 2006,
+        'genre' => 'Drammatico',
+        'img' => 'https://pad.mymovies.it/filmclub/2006/05/316/locandina.jpg',
+        'duration' => 118
+    ],
+    [
+        'title' => 'Il Caso di Thomas Crawford',
+        'director' => 'Gregory Hoblit',
+        'releaseYear' => 2007,
+        'genre' => 'Thriller',
+        'img' => null,
+        'duration' => 113
+    ],
+    [
+        'title' => 'Il Pianista',
+        'director' => 'Roman Polanski',
+        'releaseYear' => 2002,
+        'genre' => 'Biografico',
+        'img' => 'https://mr.comingsoon.it/imgdb/locandine/235x336/1548.jpg',
+        'duration' => 150
+    ],
+    [
+        'title' => 'La La Land',
+        'director' => 'Damien Chazelle',
+        'releaseYear' => 2016,
+        'genre' => 'Musical',
+        'img' => 'https://aforismi.meglio.it/img/film/La_La_Land.jpg',
+        'duration' => 128
+    ],
+    [
+        'title' => 'Alien',
+        'director' => 'Ridley Scott',
+        'releaseYear' => 1979,
+        'genre' => 'Horror',
+        'img' => null,
+        'duration' => 117
+    ],
+    [
+        'title' => 'Pulp Fiction',
+        'director' => 'Quentin Tarantino',
+        'releaseYear' => 1994,
+        'genre' => 'Drammatico',
+        'img' => 'https://pad.mymovies.it/filmclub/2006/08/102/locandina.jpg',
+        'duration' => 154
+    ],
+    [
+        'title' => 'Jurassic Park',
+        'director' => 'Steven Spielberg',
+        'releaseYear' => 1993,
+        'genre' => 'Avventura',
+        'img' => 'https://pad.mymovies.it/filmclub/2006/05/125/locandina.jpg',
+        'duration' => 127
+    ],
+    [
+        'title' => 'Il Signore degli Anelli: Le Due Torri',
+        'director' => 'Peter Jackson',
+        'releaseYear' => 2002,
+        'genre' => 'Fantasy',
+        'img' => 'https://www.jrrtolkien.it/wp-content/uploads/2014/01/Il-signore-degli-anelli-le-due-torri.jpg',
+        'duration' => 179
+    ],
+    [
+        'title' => 'Interstellar',
+        'director' => 'Christopher Nolan',
+        'releaseYear' => 2014,
+        'genre' => 'Sci-Fi',
+        'img' => 'https://pad.mymovies.it/filmclub/2014/01/001/locandina.jpg',
+        'duration' => 169
+    ]
+];

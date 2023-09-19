@@ -9,3 +9,10 @@
 .card span {
     font-weight: bold;
 }
+
+.my-card-img {
+    max-height: 250px;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+}

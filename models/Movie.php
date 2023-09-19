@@ -4,10 +4,10 @@ class Movie
 {
     public string $title;
     public string $director;
-    public int $releaseYear;
-    public string $genre;
+    public $releaseYear;
+    public $genre;
     public $img;
-    public int $duration;
+    public $duration;
 
     // Costruttore
     function __construct($_title, $_director)

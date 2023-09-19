@@ -1,7 +1,25 @@
 <?php
 include_once __DIR__ . '/db/movies_db.php';
-?>
 
+// Dall'array dei film creo un'array di istanze della classe "movie"
+$moviesList = array_map(function ($singleElement) {
+    $movie = new Movie($singleElement['title'], $singleElement['director']);
+    $movie->releaseYear = $singleElement['releaseYear'];
+    $movie->genre = $singleElement['genre'];
+    $movie->duration = $singleElement['duration'];
+    $movie->img = $singleElement['img'];
+
+    return $movie;
+}, $rawMoviesList);
+
+// Verifico se in ogni film è presente l'immagine di copertina
+foreach ($moviesList as $singleElement) {
+    if ($singleElement->img === null) {
+        $singleElement->img = $singleElement->defaultImg($singleElement->img);
+    }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,83 +43,48 @@ include_once __DIR__ . '/db/movies_db.php';
 </head>
 
 <body>
-    <main class="container">
+    <main class="container pb-5">
         <h1 class="text-center pt-5 pb-5">Movies</h1>
-        <div class="row row-cols-4 justify-content-center">
-            <div class="col">
-                <div class="card">
-                    <?php
-                    echo '<img src="' . $movie1->img . '" alt="' . $movie1->title . '">';
-                    ?>
-                    <div class="card-body">
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 justify-content-center gy-4">
+            <?php foreach ($moviesList as $movie) { ?>
+                <div class="col">
+                    <div class="card">
                         <?php
-                        echo '<h5 class="card-title">' . $movie1->title . '</h5>';
+                        echo '<img class="card-img-top my-card-img" src="' . $movie->img . '" alt="' . $movie->title . '">';
                         ?>
-                        <ul class="list-unstyled">
+                        <div class="card-body">
                             <?php
-                            echo "<li class='card-text'>
+                            echo '<h5 class="card-title">' . $movie->title . '</h5>';
+                            ?>
+                            <ul class="list-unstyled">
+                                <?php
+                                echo "<li class='card-text'>
                                     <i class='fa-solid fa-star-of-life'></i>
                                     <span>Director by</span>: 
-                                    $movie1->director
+                                    $movie->director
                                 </li>";
-                            echo "<li class='card-text'>
+                                echo "<li class='card-text'>
                                 <i class='fa-solid fa-star-of-life'></i>
                                 <span>Release Year</span>:
-                                $movie1->releaseYear
+                                $movie->releaseYear
                                 </li>";
-                            echo "<li class='card-text'>
+                                echo "<li class='card-text'>
                                     <i class='fa-solid fa-star-of-life'></i>
                                     <span>Genre</span>:
-                                    $movie1->genre
+                                    $movie->genre
                                 </li>";
-                            echo "<li class='card-text'>
+                                echo "<li class='card-text'>
                                 <i class='fa-solid fa-star-of-life'></i>
                                 <span>Duration</span>: 
-                                $movie1->duration
+                                $movie->duration
                                 minutes
                             </li>";
-                            ?>
-                        </ul>
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-            <div class="card">
-                    <?php
-                    echo '<img src="' . $movie2->img . '" alt="' . $movie2->title . '">';
-                    ?>
-                    <div class="card-body">
-                        <?php
-                        echo '<h5 class="card-title">' . $movie2->title . '</h5>';
-                        ?>
-                        <ul class="list-unstyled">
-                            <?php
-                            echo "<li class='card-text'>
-                                    <i class='fa-solid fa-star-of-life'></i>
-                                    <span>Director by</span>: 
-                                    $movie2->director
-                                </li>";
-                            echo "<li class='card-text'>
-                                    <i class='fa-solid fa-star-of-life'></i>
-                                    <span>Release Year</span>:
-                                    $movie2->releaseYear
-                                </li>";
-                            echo "<li class='card-text'>
-                                    <i class='fa-solid fa-star-of-life'></i>
-                                    <span>Genre</span>:
-                                    $movie2->genre
-                                </li>";
-                            echo "<li class='card-text'>
-                                    <i class='fa-solid fa-star-of-life'></i>
-                                    <span>Duration</span>: 
-                                    $movie2->duration
-                                    minutes
-                                </li>";
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </main>
 
