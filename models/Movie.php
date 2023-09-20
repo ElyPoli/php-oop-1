@@ -23,4 +23,9 @@ class Movie
             return $this->img = "img/default-img.jpg";
         }
     }
+
+    // Aggiungere un nuovo genere all'array
+    public function addNewGenre($_genre) {
+        $this->genre[] = $_genre;
+    }
 }

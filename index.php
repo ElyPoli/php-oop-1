@@ -12,10 +12,17 @@ $moviesList = array_map(function ($singleElement) {
     return $movie;
 }, $rawMoviesList);
 
-// Verifico se in ogni film è presente l'immagine di copertina
 foreach ($moviesList as $singleElement) {
+    // Verifico se in ogni film è presente l'immagine di copertina
     if ($singleElement->img === null) {
         $singleElement->img = $singleElement->defaultImg($singleElement->img);
+    }
+
+    // Aggiungo un nuovo genere solo a film specifici
+    if ($singleElement->title === 'Interstellar') {
+        $singleElement->addNewGenre("Fantascienza");
+    } else if ($singleElement->title === 'Jurassic Park') {
+        $singleElement->addNewGenre("Azione");
     }
 }
 
@@ -71,7 +78,7 @@ foreach ($moviesList as $singleElement) {
                                 echo "<li class='card-text'>
                                     <i class='fa-solid fa-star-of-life'></i>
                                     <span>Genre</span>:
-                                    $movie->genre
+                                    " . implode(', ', $movie->genre) . "
                                 </li>";
                                 echo "<li class='card-text'>
                                 <i class='fa-solid fa-star-of-life'></i>
